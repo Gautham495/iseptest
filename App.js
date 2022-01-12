@@ -1,50 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Button , Image} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Login from "./screens/Login";
-import SignUp from "./screens/SignUp";
-import HomeTab from "./Tabs/HomeTab";
-import ProfileTab from "./Tabs/ProfileTab";
-import SettingTab from "./Tabs/SettingTab";
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, Button, Image} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import RNBootSplash from 'react-native-bootsplash';
 
+import Login from './screens/Login';
+import SignUp from './screens/SignUp';
+import HomeTab from './Tabs/HomeTab';
+import ProfileTab from './Tabs/ProfileTab';
+import SettingTab from './Tabs/SettingTab';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabs = () =>{
-  return(
+const BottomTabs = () => {
+  return (
     <Tab.Navigator>
-    <Tab.Screen name="HomeScreen"  component={HomeTab} options={() => ({
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeTab}
+        options={() => ({
+          title: 'Home',
           tabBarIcon: () => {
-          
-            return <Image source={require('./assets/homeLogo.png')} style={{width:30, height:30}}/>
+            return (
+              <Image
+                source={require('./assets/homeLogo.png')}
+                style={{width: 30, height: 30}}
+              />
+            );
           },
-         
-        })} />
-    <Tab.Screen name="Profile" component={ProfileTab} options={() => ({
+        })}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileTab}
+        options={() => ({
           tabBarIcon: () => {
-          
-            return <Image source={require('./assets/profileLogo.png')} style={{width:30, height:30}}/>
+            return (
+              <Image
+                source={require('./assets/profileLogo.png')}
+                style={{width: 30, height: 30}}
+              />
+            );
           },
-         
-        })} />
+        })}
+      />
 
-    <Tab.Screen name="Settings" component={SettingTab} options={() => ({
+      <Tab.Screen
+        name="Settings"
+        component={SettingTab}
+        options={() => ({
           tabBarIcon: () => {
-          
-            return <Image source={require('./assets/settingsLogo.png')} style={{width:30, height:30}}/>
+            return (
+              <Image
+                source={require('./assets/settingsLogo.png')}
+                style={{width: 30, height: 30}}
+              />
+            );
           },
-         
-        })}/>
-  </Tab.Navigator>
-  )
-}
+        })}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-
+  useEffect(() => {
+    setTimeout(() => {
+      RNBootSplash.hide();
+    }, 3000);
+  }, []);
   return (
     <View style={styles.container}>
       <NavigationContainer>
@@ -54,19 +81,22 @@ const App = () => {
             component={Login}
             options={{
               headerShown: false,
-            }}
-          ></Stack.Screen>
+            }}></Stack.Screen>
           <Stack.Screen
             name="Signup"
             component={SignUp}
             options={{
               headerShown: false,
-            }}
-          ></Stack.Screen>
-            
-          <Stack.Screen name="Home" component={BottomTabs}  options={{
+            }}></Stack.Screen>
+
+          <Stack.Screen
+            name="Home"
+            component={BottomTabs}
+            options={{
               headerShown: false,
-            }} />
+              title: '',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
@@ -79,8 +109,8 @@ const styles = StyleSheet.create({
   },
   tabNames: {
     fontSize: 40,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });
 
 export default App;
