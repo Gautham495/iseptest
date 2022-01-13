@@ -20,7 +20,7 @@ const BottomTabs = () => {
         name="HomeScreen"
         component={HomeTab}
         options={() => ({
-          title: 'Home',
+          title: 'Home Tab',
           tabBarIcon: () => {
             return (
               <Image
